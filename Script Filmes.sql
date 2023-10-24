@@ -325,3 +325,62 @@ REFERENCES [dbo].[Generos] ([Id])
 GO
 ALTER TABLE [dbo].[FilmesGenero] CHECK CONSTRAINT [FK__FilmesGen__IdGen__2E1BDC42]
 GO
+
+-- Respostas ao Desafio
+
+--1) 
+Select Nome, Ano from [dbo].[Filmes]
+
+--2)
+Select Nome, Ano, Duracao from [dbo].[Filmes] order by Ano asc
+
+--3)
+Select Nome, Ano, Duracao from [dbo].[Filmes] where Nome = 'De Volta para o Futuro'
+
+--4)
+Select Nome, Ano, Duracao from [dbo].[Filmes] where Ano = 1997
+
+--5)
+Select Nome, Ano, Duracao from [dbo].[Filmes] where Ano > 2000
+
+--6)
+Select Nome, Ano, Duracao from [dbo].[Filmes] where 
+Duracao>100 and Duracao <150 order by duracao asc
+
+--7) --FAZER
+Select Ano, count(id)
+from [dbo].[Filmes] 
+group by Ano
+order by count(duracao) desc
+
+--8)
+ Select PrimeiroNome, UltimoNome from Atores where Genero = 'M'
+
+--9)
+Select PrimeiroNome, UltimoNome from Atores where Genero = 'F'
+order by PrimeiroNome
+
+--10)
+Select f.Nome, g.Genero from 
+Filmes f inner join FilmesGenero fg 
+on f.Id = fg.IdFilme
+inner join Generos g
+on g.Id = fg.IdGenero
+
+--11)
+Select f.Nome, g.Genero from 
+Filmes f inner join FilmesGenero fg 
+on f.Id = fg.IdFilme
+inner join Generos g
+on g.Id = fg.IdGenero
+where 
+g.Genero = 'Mistério'
+
+
+--12)
+Select f.Nome, a.PrimeiroNome, a.UltimoNome, ef.Papel 
+from Filmes f
+inner join ElencoFilme ef
+on f.Id = ef.IdFilme
+inner join Atores a
+on ef.IdAtor = a.Id
